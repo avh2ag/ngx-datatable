@@ -10,6 +10,7 @@ import { MouseEvent } from '../../events';
 @Component({
   selector: 'datatable-body',
   template: `
+  <tbody>
     <datatable-selection
       #selector
       [selected]="selected"
@@ -102,6 +103,7 @@ import { MouseEvent } from '../../events';
         [innerHTML]="emptyMessage">
       </div>
     </datatable-selection>
+  </tbody>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

@@ -3,7 +3,8 @@ import { DatatableFooterDirective } from './footer.directive';
 @Component({
   selector: 'datatable-footer',
   template: `
-    <div
+  <tfoot>
+    <tr
       class="datatable-footer-inner"
       [ngClass]="{'selected-count': selectedMessage}"
       [style.height.px]="footerHeight">
@@ -18,12 +19,12 @@ import { DatatableFooterDirective } from './footer.directive';
           offset: offset
         }">
       </ng-template>
-      <div class="page-count" *ngIf="!footerTemplate">
+      <td class="page-count" *ngIf="!footerTemplate">
         <span *ngIf="selectedMessage">
           {{selectedCount?.toLocaleString()}} {{selectedMessage}} / 
         </span>
         {{rowCount?.toLocaleString()}} {{totalMessage}}
-      </div>
+      </td>
       <datatable-pager *ngIf="!footerTemplate"
         [pagerLeftArrowIcon]="pagerLeftArrowIcon"
         [pagerRightArrowIcon]="pagerRightArrowIcon"
@@ -35,7 +36,8 @@ import { DatatableFooterDirective } from './footer.directive';
         [hidden]="!isVisible"
         (change)="page.emit($event)">
       </datatable-pager>
-    </div>
+    </tr>
+  </tfoot>
   `,
   host: {
     class: 'datatable-footer'
