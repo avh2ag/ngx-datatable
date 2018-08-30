@@ -10,7 +10,6 @@ import { MouseEvent } from '../../events';
 @Component({
   selector: 'datatable-body',
   template: `
-  <tbody>
     <datatable-selection
       #selector
       [selected]="selected"
@@ -31,71 +30,73 @@ import { MouseEvent } from '../../events';
         [scrollHeight]="scrollHeight"
         [scrollWidth]="columnGroupWidths?.total"
         (scroll)="onBodyScroll($event)">
-        <datatable-summary-row
-          *ngIf="summaryRow && summaryPosition === 'top'"
-          [rowHeight]="summaryHeight"
-          [offsetX]="offsetX"
-          [innerWidth]="innerWidth"
-          [rows]="rows"
-          [columns]="columns">
-        </datatable-summary-row>
-        <datatable-row-wrapper
-          [groupedRows]="groupedRows"
-          *ngFor="let group of temp; let i = index; trackBy: rowTrackingFn;"
-          [innerWidth]="innerWidth"
-          [ngStyle]="getRowsStyles(group)"
-          [rowDetail]="rowDetail"
-          [groupHeader]="groupHeader"
-          [offsetX]="offsetX"
-          [detailRowHeight]="getDetailRowHeight(group[i],i)"
-          [row]="group"
-          [expanded]="getRowExpanded(group)"
-          [rowIndex]="getRowIndex(group[i])"
-          (rowContextmenu)="rowContextmenu.emit($event)">
-          <datatable-body-row
-            *ngIf="!groupedRows; else groupedRowsTemplate"
-            tabindex="-1"
-            [isSelected]="selector.getRowSelected(group)"
-            [innerWidth]="innerWidth"
+        <tbody>
+          <datatable-summary-row
+            *ngIf="summaryRow && summaryPosition === 'top'"
+            [rowHeight]="summaryHeight"
             [offsetX]="offsetX"
-            [columns]="columns"
-            [rowHeight]="getRowHeight(group)"
+            [innerWidth]="innerWidth"
+            [rows]="rows"
+            [columns]="columns">
+          </datatable-summary-row>
+          <datatable-row-wrapper
+            [groupedRows]="groupedRows"
+            *ngFor="let group of temp; let i = index; trackBy: rowTrackingFn;"
+            [innerWidth]="innerWidth"
+            [ngStyle]="getRowsStyles(group)"
+            [rowDetail]="rowDetail"
+            [groupHeader]="groupHeader"
+            [offsetX]="offsetX"
+            [detailRowHeight]="getDetailRowHeight(group[i],i)"
             [row]="group"
-            [rowIndex]="getRowIndex(group)"
             [expanded]="getRowExpanded(group)"
-            [rowClass]="rowClass"
-            [displayCheck]="displayCheck"
-            [treeStatus]="group.treeStatus"
-            (treeAction)="onTreeAction(group)"
-            (activate)="selector.onActivate($event, indexes.first + i)">
-          </datatable-body-row>
-          <ng-template #groupedRowsTemplate>
+            [rowIndex]="getRowIndex(group[i])"
+            (rowContextmenu)="rowContextmenu.emit($event)">
             <datatable-body-row
-              *ngFor="let row of group.value; let i = index; trackBy: rowTrackingFn;"
+              *ngIf="!groupedRows; else groupedRowsTemplate"
               tabindex="-1"
-              [isSelected]="selector.getRowSelected(row)"
+              [isSelected]="selector.getRowSelected(group)"
               [innerWidth]="innerWidth"
               [offsetX]="offsetX"
               [columns]="columns"
-              [rowHeight]="getRowHeight(row)"
-              [row]="row"
-              [group]="group.value"
-              [rowIndex]="getRowIndex(row)"
-              [expanded]="getRowExpanded(row)"
+              [rowHeight]="getRowHeight(group)"
+              [row]="group"
+              [rowIndex]="getRowIndex(group)"
+              [expanded]="getRowExpanded(group)"
               [rowClass]="rowClass"
-              (activate)="selector.onActivate($event, i)">
+              [displayCheck]="displayCheck"
+              [treeStatus]="group.treeStatus"
+              (treeAction)="onTreeAction(group)"
+              (activate)="selector.onActivate($event, indexes.first + i)">
             </datatable-body-row>
-          </ng-template>
-        </datatable-row-wrapper>
-        <datatable-summary-row
-          *ngIf="summaryRow && summaryPosition === 'bottom'"
-          [ngStyle]="getBottomSummaryRowStyles()"
-          [rowHeight]="summaryHeight"
-          [offsetX]="offsetX"
-          [innerWidth]="innerWidth"
-          [rows]="rows"
-          [columns]="columns">
-        </datatable-summary-row>
+            <ng-template #groupedRowsTemplate>
+              <datatable-body-row
+                *ngFor="let row of group.value; let i = index; trackBy: rowTrackingFn;"
+                tabindex="-1"
+                [isSelected]="selector.getRowSelected(row)"
+                [innerWidth]="innerWidth"
+                [offsetX]="offsetX"
+                [columns]="columns"
+                [rowHeight]="getRowHeight(row)"
+                [row]="row"
+                [group]="group.value"
+                [rowIndex]="getRowIndex(row)"
+                [expanded]="getRowExpanded(row)"
+                [rowClass]="rowClass"
+                (activate)="selector.onActivate($event, i)">
+              </datatable-body-row>
+            </ng-template>
+          </datatable-row-wrapper>
+          <datatable-summary-row
+            *ngIf="summaryRow && summaryPosition === 'bottom'"
+            [ngStyle]="getBottomSummaryRowStyles()"
+            [rowHeight]="summaryHeight"
+            [offsetX]="offsetX"
+            [innerWidth]="innerWidth"
+            [rows]="rows"
+            [columns]="columns">
+          </datatable-summary-row>
+        </tbody>
       </datatable-scroller>
       <div
         class="empty-row"
@@ -103,7 +104,6 @@ import { MouseEvent } from '../../events';
         [innerHTML]="emptyMessage">
       </div>
     </datatable-selection>
-  </tbody>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
@@ -362,7 +362,7 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
    */
   updatePage(direction: string): void {
     let offset = this.indexes.first / this.pageSize;
-
+    console.log(offset);
     if (direction === 'up') {
       offset = Math.ceil(offset);
     } else if (direction === 'down') {
