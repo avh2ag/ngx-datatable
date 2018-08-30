@@ -9,18 +9,16 @@ import { MouseEvent } from '../../events';
 @Component({
   selector: 'datatable-header',
   template: `
-    <div
+    <thead>
+    <tr
       orderable
       (reorder)="onColumnReordered($event)"
       (targetChanged)="onTargetChanged($event)"
-      [style.width.px]="_columnGroupWidths.total"
       class="datatable-header-inner">
-      <div
-        *ngFor="let colGroup of _columnsByPin; trackBy: trackByGroups"
-        [class]="'datatable-row-' + colGroup.type"
-        [ngStyle]="_styleByGroup[colGroup.type]">
+      <th *ngFor="let column of _columnsByPin[1].columns; trackBy: columnTrackingFn"
+        >
         <datatable-header-cell
-          *ngFor="let column of colGroup.columns; trackBy: columnTrackingFn"
+          
           resizeable
           [resizeEnabled]="column.resizeable"
           (resize)="onColumnResized($event, column)"
@@ -49,8 +47,9 @@ import { MouseEvent } from '../../events';
           (select)="select.emit($event)"
           (columnContextmenu)="columnContextmenu.emit($event)">
         </datatable-header-cell>
-      </div>
-    </div>
+      </th>
+    </tr>
+    </thead>
   `,
   host: {
     class: 'datatable-header'
@@ -70,7 +69,7 @@ export class DataTableHeaderComponent {
   @Input() set innerWidth(val: number) {
     this._innerWidth = val;
 
-    if (this._columns) {    
+    if (this._columns) {  
       const colByPin = columnsByPin(this._columns);
       this._columnGroupWidths = columnGroupWidths(colByPin, this._columns);
       this.setStylesByGroup();
@@ -107,6 +106,7 @@ export class DataTableHeaderComponent {
 
     const colsByPin = columnsByPin(val);
     this._columnsByPin = columnsByPinArr(val);
+    console.log(this._columnsByPin);
     this._columnGroupWidths = columnGroupWidths(colsByPin, val);
     this.setStylesByGroup();
   }
@@ -277,9 +277,9 @@ export class DataTableHeaderComponent {
   }
 
   setStylesByGroup() {
-    this._styleByGroup['left'] = this.calcStylesByGroup('left');
+    // this._styleByGroup['left'] = this.calcStylesByGroup('left');
     this._styleByGroup['center'] = this.calcStylesByGroup('center');
-    this._styleByGroup['right'] = this.calcStylesByGroup('right');
+    // this._styleByGroup['right'] = this.calcStylesByGroup('right');
     this.cd.detectChanges();
   }
 

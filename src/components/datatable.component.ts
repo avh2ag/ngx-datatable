@@ -25,7 +25,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 @Component({
   selector: 'ngx-datatable',
   template: `
-    <div
+    <table
       visibilityObserver
       (visible)="recalculate()">
       <datatable-header
@@ -104,7 +104,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
         [pagerNextIcon]="cssClasses.pagerNext"
         (page)="onFooterPage($event)">
       </datatable-footer>
-    </div>
+    </table>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
