@@ -14,7 +14,7 @@ import { TreeStatus } from '../../index';
   selector: 'datatable-body-row',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div
+    <tr
       *ngFor="let colGroup of _columnsByPin; let i = index; trackBy: trackByGroups"
       class="datatable-row-{{colGroup.type}} datatable-row-group"
       [ngStyle]="_groupStyles[colGroup.type]">
@@ -33,7 +33,7 @@ import { TreeStatus } from '../../index';
         (activate)="onActivate($event, ii)"
         (treeAction)="onTreeAction()">
       </datatable-body-cell>
-    </div>
+    </tr>
   `
 })
 export class DataTableBodyRowComponent implements DoCheck {
@@ -150,9 +150,10 @@ export class DataTableBodyRowComponent implements DoCheck {
   }
 
   buildStylesByGroup() {
-    this._groupStyles['left'] = this.calcStylesByGroup('left');
-    this._groupStyles['center'] = this.calcStylesByGroup('center');
-    this._groupStyles['right'] = this.calcStylesByGroup('right');
+    // this._groupStyles['left'] = this.calcStylesByGroup('left');
+    // this._groupStyles['center'] = this.calcStylesByGroup('center');
+    // this._groupStyles['right'] = this.calcStylesByGroup('right');
+    console.log(this._groupStyles);
     this.cd.markForCheck();
   }
 

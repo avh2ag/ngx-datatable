@@ -362,7 +362,6 @@ export class DataTableBodyComponent implements OnInit, OnDestroy {
    */
   updatePage(direction: string): void {
     let offset = this.indexes.first / this.pageSize;
-    console.log(offset);
     if (direction === 'up') {
       offset = Math.ceil(offset);
     } else if (direction === 'down') {

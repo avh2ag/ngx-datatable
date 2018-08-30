@@ -8,7 +8,7 @@ import { MouseEvent } from '../../events';
   selector: 'datatable-row-wrapper',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div 
+    <tr 
       *ngIf="groupHeader && groupHeader.template"
       class="datatable-group-header"
       [ngStyle]="getGroupHeaderStyle()">
@@ -17,12 +17,12 @@ import { MouseEvent } from '../../events';
         [ngTemplateOutlet]="groupHeader.template"
         [ngTemplateOutletContext]="groupContext">
       </ng-template>
-    </div>
+    </tr>
     <ng-content 
       *ngIf="(groupHeader && groupHeader.template && expanded) || 
              (!groupHeader || !groupHeader.template)">
     </ng-content>
-    <div
+    <tr
       *ngIf="rowDetail && rowDetail.template && expanded"
       [style.height.px]="detailRowHeight"
       class="datatable-row-detail">
@@ -31,7 +31,7 @@ import { MouseEvent } from '../../events';
         [ngTemplateOutlet]="rowDetail.template"
         [ngTemplateOutletContext]="rowContext">
       </ng-template>
-    </div>
+    </tr>
   `,
   host: {
     class: 'datatable-row-wrapper'
@@ -108,7 +108,7 @@ export class DataTableRowWrapperComponent implements DoCheck {
 
     styles['transform'] = 'translate3d(' + this.offsetX + 'px, 0px, 0px)';
     styles['backface-visibility'] = 'hidden';
-    styles['width'] = this.innerWidth;
+    // styles['width'] = this.innerWidth;
 
     return styles; 
   }

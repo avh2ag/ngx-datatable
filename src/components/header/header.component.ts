@@ -106,7 +106,6 @@ export class DataTableHeaderComponent {
 
     const colsByPin = columnsByPin(val);
     this._columnsByPin = columnsByPinArr(val);
-    console.log(this._columnsByPin);
     this._columnGroupWidths = columnGroupWidths(colsByPin, val);
     this.setStylesByGroup();
   }
