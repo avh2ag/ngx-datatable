@@ -54,6 +54,7 @@
         .datatable-header-cell{
           white-space: normal;
           overflow: scroll;
+          word-break: break-word;
           text-overflow: ellipsis;
         }
       }
@@ -71,14 +72,16 @@
         white-space: normal;
 
         .datatable-body-cell {
-          overflow-y: scroll;
+          overflow: scroll;
           white-space: normal;
+          word-break: break-word;
           text-overflow: ellipsis;
         }
 
         .datatable-body-group-cell {
-          overflow-y: scroll;
+          overflow: scroll;
           white-space: normal;
+          word-break: break-word;
           text-overflow: ellipsis;
         }        
       }
