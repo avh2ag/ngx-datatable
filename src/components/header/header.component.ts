@@ -14,11 +14,15 @@ import { MouseEvent } from '../../events';
       orderable
       (reorder)="onColumnReordered($event)"
       (targetChanged)="onTargetChanged($event)"
+      [style.width.px]="_columnGroupWidths.total"
       class="datatable-header-inner">
-      <th *ngFor="let column of _columnsByPin[1].columns; trackBy: columnTrackingFn"
-        >
+
+      <th 
+      *ngFor="let colGroup of _columnsByPin; trackBy: trackByGroups"
+      [class]="'datatable-row-' + colGroup.type"
+      [ngStyle]="_styleByGroup[colGroup.type]">
         <datatable-header-cell
-          
+          *ngFor="let column of colGroup.columns; trackBy: columnTrackingFn"
           resizeable
           [resizeEnabled]="column.resizeable"
           (resize)="onColumnResized($event, column)"

@@ -9,7 +9,7 @@ import { MouseEvent } from '../../events';
 @Component({
   selector: 'datatable-header-cell',
   template: `
-    <div class="datatable-header-cell-template-wrap">
+    <span class="datatable-header-cell-template-wrap">
       <ng-template
         *ngIf="isTarget"
         [ngTemplateOutlet]="targetMarkerTemplate"
@@ -42,7 +42,7 @@ import { MouseEvent } from '../../events';
         (click)="onSort()"
         [class]="sortClass">
       </span>
-    </div>
+    </span>
   `,
   host: {
     class: 'datatable-header-cell'

@@ -150,10 +150,9 @@ export class DataTableBodyRowComponent implements DoCheck {
   }
 
   buildStylesByGroup() {
-    // this._groupStyles['left'] = this.calcStylesByGroup('left');
-    // this._groupStyles['center'] = this.calcStylesByGroup('center');
-    // this._groupStyles['right'] = this.calcStylesByGroup('right');
-    console.log(this._groupStyles);
+    this._groupStyles['left'] = this.calcStylesByGroup('left');
+    this._groupStyles['center'] = this.calcStylesByGroup('center');
+    this._groupStyles['right'] = this.calcStylesByGroup('right');
     this.cd.markForCheck();
   }
 

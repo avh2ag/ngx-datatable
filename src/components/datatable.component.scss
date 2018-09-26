@@ -38,6 +38,7 @@
   &.scroll-horz {
     .datatable-body {
       overflow-x:auto;
+      overflow-y: visible;
       -webkit-overflow-scrolling: touch;
     }
   }
@@ -49,10 +50,10 @@
   &.fixed-header {
     .datatable-header {
       .datatable-header-inner{
-        white-space: nowrap;
+        white-space: normal;
         .datatable-header-cell{
-          white-space: nowrap;
-          overflow: hidden;
+          white-space: normal;
+          overflow: scroll;
           text-overflow: ellipsis;
         }
       }
@@ -64,20 +65,20 @@
    */
   &.fixed-row {
     .datatable-scroll{
-      white-space: nowrap;
+      white-space: normal;
       
       .datatable-body-row {
-        white-space: nowrap;
+        white-space: normal;
 
         .datatable-body-cell {
-          overflow: hidden;
-          white-space: nowrap;
+          overflow-y: scroll;
+          white-space: normal;
           text-overflow: ellipsis;
         }
 
         .datatable-body-group-cell {
-          overflow: hidden;
-          white-space: nowrap;
+          overflow-y: scroll;
+          white-space: normal;
           text-overflow: ellipsis;
         }        
       }
